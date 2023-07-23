@@ -10,7 +10,7 @@ vars <- c(
 )
 
 
-navbarPage("Superzip", id="nav",
+navbarPage("RLI Sharks and Rays", id="nav",
 
   tabPanel("Interactive map",
     div(class="outer",
@@ -29,7 +29,7 @@ navbarPage("Superzip", id="nav",
         draggable = TRUE, top = 60, left = "auto", right = 20, bottom = "auto",
         width = 330, height = "auto",
 
-        h2("ZIP explorer"),
+        h2("RLI Explorer"),
 
         selectInput("color", "Color", vars),
         selectInput("size", "Size", vars, selected = "adultpop"),
