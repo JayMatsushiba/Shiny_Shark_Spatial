@@ -3,7 +3,6 @@ library(RColorBrewer)
 library(scales)
 library(lattice)
 library(dplyr)
-library(scales)
 
 tilesURL <- "https://api.mapbox.com/styles/v1/jaymatsushiba/clkfuifsm002e01r1eo1b6sm5/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamF5bWF0c3VzaGliYSIsImEiOiJjazNtNnZjMjkxY2FnM2ZvMzlteW01YWt3In0.7nVJaIxpI0ZHAm0HHMOnBQ"
 accessToken <- "pk.eyJ1IjoiamF5bWF0c3VzaGliYSIsImEiOiJjazNtNnZjMjkxY2FnM2ZvMzlteW01YWt3In0.7nVJaIxpI0ZHAm0HHMOnBQ"
@@ -29,8 +28,6 @@ function(input, output, session) {
     colorBy <- input$color
     opacityBy <- input$opacity
     
-    
-    
     # if (colorBy == "superzip") {
     #   # Color and palette are treated specially in the "superzip" case, because
     #   # the values are categorical instead of continuous.
@@ -51,7 +48,12 @@ function(input, output, session) {
     
     colorData <- areas[[colorBy]]
     opacityData <- areas[[opacityBy]]
-    pal <- colorNumeric("viridis", colorData)
+    
+    if (colorBy == "Freq") {
+      pal <- colorNumeric("viridis", colorData)
+    } else {
+      pal <- colorNumeric("viridis", colorData, reverse = TRUE)
+    }
     
     if (input$variables == "univariate") {
       leafletProxy("map", data = areas) %>%
